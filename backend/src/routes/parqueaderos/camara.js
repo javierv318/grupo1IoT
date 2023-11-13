@@ -6,8 +6,8 @@ const connection = mysql.createPool({
     connectionLimit: 500,
     host: 'localhost',
     user: 'root',
-    password: '', //el password de ingreso a mysql
-    database: 'iotdatos',
+    password: 'root', //el password de ingreso a mysql
+    database: 'proyectoIoT',
     port: 3306
 });
 connection.on('error', function(err) {

@@ -6,15 +6,15 @@ const connection = mysql.createPool({
     connectionLimit: 500,
     host: 'localhost',
     user: 'root',
-    password: '', //el password de ingreso a mysql
-    database: 'iotdatos',
+    password: 'root', //el password de ingreso a mysql
+    database: 'proyectoIoT',
     port: 3306
 });
 connection.on('error', function(err) {
     console.log("[mysql error]",err);
   });
 //function GET para todos los datos
-router.get('/parqueaderos/laser', (req, res) => {
+router.get('/parqueadero/laser', (req, res) => {
     var json1 = {}; 
     var arreglo = []; 
     connection.getConnection(function (error, tempConn) { 
@@ -46,7 +46,7 @@ router.get('/parqueaderos/laser', (req, res) => {
     });
 });
 //función POST para almacenar datos
-router.post('/parqueaderos/laser', (req, res) => {
+router.post('/parqueadero/laser', (req, res) => {
     console.log(req.body); 
     json1 = req.body; 
     connection.getConnection(function (error, tempConn) { 

@@ -6,8 +6,8 @@ const connection = mysql.createPool({
     connectionLimit: 500,
     host: 'localhost',
     user: 'root',
-    password: '', //el password de ingreso a mysql
-    database: 'iotdatos',
+    password: 'root', //el password de ingreso a mysql
+    database: 'proyectoIoT',
     port: 3306
 });
 
@@ -15,7 +15,7 @@ connection.on('error', function (err) {
     console.log("[mysql error]", err);
 });
 //Metodo GET para TODOS LOS USUARIOS
-router.get('/parqueaderos/usuarios', (req, res) => {
+router.get('/parqueadero/usuarios', (req, res) => {
     var json1 = {}; 
     var arreglo = []; 
     connection.getConnection(function (error, tempConn) { 
@@ -48,7 +48,7 @@ router.get('/parqueaderos/usuarios', (req, res) => {
     });
 });
 //Metodo POST para CREAR UN USUARIO
-router.post('/parqueaderos/usuarios', (req, res) => {
+router.post('/parqueadero/usuarios', (req, res) => {
     console.log(req.body); 
     json1 = req.body; 
     connection.getConnection(function (error, tempConn) { 
@@ -72,7 +72,7 @@ router.post('/parqueaderos/usuarios', (req, res) => {
     });
 });
 //Metodo GET para BUSCAR UN USUARIO dado el parametro user
-router.get('/parquedaros/usuarios/:user', (req, res) => {
+router.get('/parquedero/usuarios/:user', (req, res) => {
     var json1 = {}; 
     var buscado = req.params.user;
     connection.getConnection(function (error, tempConn) { 
@@ -108,7 +108,7 @@ router.get('/parquedaros/usuarios/:user', (req, res) => {
     });
 });
 //Metodo GET para VALIDAR UN USUARIO dado el parametro user, password
-router.get('/parqueaderos/usuarios/:user/:password', (req, res) => {
+router.get('/parqueadero/usuarios/:user/:password', (req, res) => {
     var json1 = {}; 
     var userBuscado = req.params.user
     var passBuscado = req.params.password
@@ -150,7 +150,7 @@ router.get('/parqueaderos/usuarios/:user/:password', (req, res) => {
     });
 });
 //metodo POST para ACTUALIZAR UN USUARIO
-router.post('/parqueaderos/usuarios/:user', (req, res) => {
+router.post('/parqueadero/usuarios/:user', (req, res) => {
     var json1 = {}; 
     var buscado = req.params.user;
     var json2 = req.body;
