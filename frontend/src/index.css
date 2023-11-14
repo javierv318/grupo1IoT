@@ -1,0 +1,245 @@
+* {
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+main {
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  text-align: justify;
+}
+.Container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin: 0%;
+}
+.LeftSide {
+  padding: 90px 140px 90px 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 50%;
+  height: 100%;
+  position: relative;
+  background-color: white;
+}
+.RightSide {
+  padding: 220px 109px 220px 109px;
+  display: flex;
+  left: 50%;
+  bottom: 0%;
+  align-self: stretch;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  width: 50%;
+  height: 100%;
+  position: fixed;
+  background-size: cover;
+}
+.Logo {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  position: static;
+}
+.Square {
+  background: #eef2ff;
+  border-radius: 12px;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  left: 140px;
+  top: 90px;
+}
+.Form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  align-self: stretch;
+}
+.FormGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+}
+.Frame1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: stretch;
+}
+.Register {
+  align-self: stretch;
+  text-align: center;
+}
+.Text1Rigth {
+  left: 101px;
+  top: 564px;
+  align-self: stretch;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  font-family: Inter;
+  letter-spacing: 2.1px;
+  font-weight: 600;
+  line-height: 28px;
+  align-self: stretch;
+  position: absolute;
+}
+.Text2Rigth {
+  width: 76%;
+  left: 101px;
+  top: 602px;
+  color: white;
+  font-size: 28px;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: 42px;
+  align-self: stretch;
+  position: absolute;
+}
+.Spacing35 {
+  height: 35px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+.Spacing25 {
+  height: 25px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+.Purple28 {
+  color: var(--primary, #4f46e5);
+  font: 600 28px "Inter", sans-serif;
+  position: absolute;
+  left: 159px;
+  top: 103px;
+}
+.Purple16 {
+  color: #4f46e5;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 600;
+}
+.Black32 {
+  color: black;
+  font-size: 32px;
+  font-family: Inter;
+  font-weight: 600;
+}
+.Black16 {
+  color: black;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 400;
+}
+.Black16Bold {
+  color: black;
+  font-size: 16px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.Gray16 {
+  align-self: stretch;
+  color: #4b5563;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.Gray16Bold {
+  align-self: stretch;
+  color: #4b5563;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 600;
+  line-height: 28px;
+}
+.White16Bold {
+  color: white;
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 600;
+}
+
+input[type="email"],
+input[type="password"] {
+  display: flex;
+  height: 65px;
+  padding: 20px 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 0;
+  outline: none;
+  background: #f3f4f6;
+}
+.RememberMe {
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  display: inline-flex;
+}
+input[type="checkbox"]:hover {
+  cursor: pointer; /* Cambia el cursor a una mano al pasar el ratón */
+}
+input[type="checkbox"] {
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #f3f4f6;
+  border-radius: 3px;
+}
+
+input[type="checkbox"]:checked::before {
+  content: "✔";
+  border-radius: 3px;
+  background-color: #0070f3;
+  border-color: #0070f3;
+  color: white;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  font-size: 14px;
+  text-align: center;
+  line-height: 25px;
+}
+.Button:hover {
+  cursor: pointer; /* Cambia el cursor a una mano al pasar el ratón */
+}
+.Button {
+  align-self: stretch;
+  padding: 25px;
+  background: #4f46e5;
+  box-shadow: 0px 30px 60px rgba(79, 70, 229, 0.15);
+  border-radius: 6px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  display: inline-flex;
+  text-decoration: none;
+  border: 0;
+  outline: none;
+}
