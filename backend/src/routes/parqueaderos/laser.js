@@ -15,7 +15,8 @@ connection.on('error', function(err) {
   });
 //function GET para todos los datos
 router.get('/parqueadero/laser', (req, res) => {
-    var json1 = {}; 
+    var json1 = {};
+    //var json2={};
     var arreglo = []; 
     connection.getConnection(function (error, tempConn) { 
         if (error) {
@@ -42,6 +43,23 @@ router.get('/parqueadero/laser', (req, res) => {
                     res.json(arreglo);
                 }
             });
+            /*
+            tempConn.query('SELECT * FROM presencia', function (error,result){
+                var resultado = result; 
+                if (error) {
+                    throw error;
+                } else {
+                    tempConn.release(); 
+                    for (i = 0; i < resultado.length; i++) { 
+                        json2 = {
+                            "bahía"=resultado[i].bahía
+                        }; 
+                        arreglo.push(json2); 
+                    }
+                    res.json(arreglo);
+                }
+            })
+            */
         }
     });
 });

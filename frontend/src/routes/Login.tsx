@@ -14,7 +14,7 @@ export default function Login() {
   // }
 
   const login = () => {
-    var string = "http://localhost:3000/parqueadero/usuarios/"+user+"/"+contra;
+    var string = "http://20.42.107.153:3000/parqueadero/usuarios/"+user+"/"+contra;
     fetch(string, {
       method: "GET",
       headers: {
@@ -22,11 +22,16 @@ export default function Login() {
       },
     })
       .then((res) => {
-        console.log(res);
-        if (res.status === 200) {
+        console.log(res.status === 251);
+        if (res.status === 251) {
           auth.isAuthenticated = true;
           navigate("/Dashboard");
-        } else {
+        }
+        if(res.status === 252) {
+          auth.isAuthenticated = true;
+          navigate("/Dashboard2");
+        }
+        if(!res.ok){
           auth.isAuthenticated = false;
           alert("Verifique sus datos de ingreso");
         }
@@ -53,14 +58,14 @@ export default function Login() {
             <div className="Spacing25"></div>
             <form className="Form">
               <div className="FormGroup">
-                <div className="Black16Bold">Email</div>
+                <div className="Black16Bold">Usuario</div>
                 <input
                   className="Black16"
                   type="email"
                   value={user}
                   onChange={(e) => setUser(e.target.value)}
                   name="email"
-                  placeholder="Correo Electrónico"
+                  placeholder="Usuario"
                   required
                 />
               </div>
@@ -90,10 +95,6 @@ export default function Login() {
               </button>
             </form>
             <div className="Spacing35"></div>
-            <div className="Register">
-              <span className="Gray16Bold">BelumPunyaAkun?</span>
-              <span className="Purple16">aftarSekarang, gratis!</span>
-            </div>
             <div
               className="RightSide"
               style={{ backgroundImage: `url(${background})` }}

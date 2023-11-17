@@ -137,8 +137,12 @@ router.get('/parqueadero/usuarios/:user/:password', (req, res) => {
                             "contraseña": resultado[0].contraseña,
                         };
                         if (passBuscado === json1.contraseña) {
-                            res.status(200);
-                            res.send(json1);
+                            if(json1.tipo == 1){
+                                res.status(251);
+                            }
+                            else{
+                                res.status(252);
+                            }
                         }
                         else {
                             res.sendStatus(401);

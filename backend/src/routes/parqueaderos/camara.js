@@ -7,7 +7,7 @@ const connection = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'root', //el password de ingreso a mysql
-    database: 'proyectoIoT',
+    database: 'edificioiot',
     port: 3306
 });
 connection.on('error', function(err) {
@@ -23,7 +23,7 @@ router.get('/parqueadero/camara', (req, res) => {
         }
         else {
             console.log('Conexion correcta.');
-            tempConn.query('SELECT * FROM control_acceso', function (error, result) {
+            tempConn.query('SELECT * FROM gr1_control_acceso', function (error, result) {
                 var resultado = result; 
                 if (error) {
                     throw error;
@@ -32,7 +32,7 @@ router.get('/parqueadero/camara', (req, res) => {
                     for (i = 0; i < resultado.length; i++) { 
                         json1 = {
                             "id": resultado[i].id,
-                            "fechahora": resultado[i].fechahora, 
+                            "time_stamp": resultado[i].time_stamp, 
                             "placa": resultado[i].placa,
                         }; 
                         arreglo.push(json1); 
@@ -53,7 +53,7 @@ router.get('/parqueadero/camara/:placa', (req, res) => {
         }
         else {
             console.log('Conexion correcta.');
-            tempConn.query('SELECT * FROM vehiculo_permitido WHERE placa_vehiculo = ?',[placaBuscada], function (error, result) {
+            tempConn.query('SELECT * FROM gr1_vehiculos_permitido WHERE placa_vehiculo = ?',[placaBuscada], function (error, result) {
                 var resultado = result; //se almacena el resultado de la consulta en la variable resultado
                 if (error) {
                     throw error;
@@ -89,12 +89,12 @@ router.post('/parqueadero/camara/:tipo', (req, res) => {
         }
         else {
             console.log('Conexion correcta.');
-            if(tipo === 1){
-                tempConn.query('INSERT INTO control_acceso VALUES(null,?,?)',
-                    [json1.fechahora, json1.placa], function
+            if(tipo == 1){
+                tempConn.query('INSERT INTO gr1_control_acceso VALUES(?,?,?)',
+                    [json1.id,json1.placa, json1.time_stamp], function
                     (error, result) {
                     if (error) {
-                        res.send("error al ejecutar el query");
+                        res.send(error);
                     } else {
                         tempConn.release();
                         res.send("datos almacenados");
@@ -102,11 +102,12 @@ router.post('/parqueadero/camara/:tipo', (req, res) => {
                 });
             }
             else{
-                tempConn.query('INSERT INTO vehiculo_permitido VALUES(null,?,?,?,?,?)',
+                console.log("no entro en el if");
+                tempConn.query('INSERT INTO gr1_vehiculos_permitidos VALUES(null,?,?,?,?,?)',
                 [json1.nombre_titular, json1.apellido_titular,json1.marca_vehiculo, json1.color_vehiculo,json1.placa_vehiculo], function
                 (error, result) { 
                 if (error) {
-                    res.send("error al ejecutar el query");
+                    res.send(error)
                 } else {
                     tempConn.release();
                     res.send("datos almacenados"); 

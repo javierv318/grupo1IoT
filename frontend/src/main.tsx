@@ -6,6 +6,7 @@ import Login from './routes/Login.tsx';
 import ProtectedRoute from './routes/ProtectedRoute.tsx';
 import { AuthProvider } from './auth/AuthProvider.tsx';
 import Dashboard from './routes/Dashboard.tsx';
+import Dashboard2 from './routes/Dashboard2.tsx';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
         path: "/Dashboard",
         element: <Dashboard />
       },
+      {
+        path: "/Dashboard2",
+        element: <Dashboard2/>
+      }
     ],
   }
 ])
