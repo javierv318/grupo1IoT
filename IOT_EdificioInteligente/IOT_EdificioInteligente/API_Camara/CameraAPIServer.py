@@ -15,26 +15,27 @@ app = Flask(__name__)
 def home(): 
     if(request.method == 'GET'): 
   
-        data = "hello world"
+        data = "API Camara reconocimiento v1"
         return jsonify({'data': data}) 
   
   
-# A simple function to calculate the square of a number 
-# TODO borrar
-@app.route('/home/<int:num>', methods = ['GET']) 
-def disp(num): 
-  
-    return jsonify({'data': num**2}) 
-  
-
-# A function in charge of taking the photograph 
+# Funcion a cargo de tomar la placa y devolverla
 @app.route('/jetson/getPlaca', methods = ['GET'])
 def getPlaca():
-    tmpPlaca = getPlacaVehiculo()
-    return jsonify({'Placa':tmpPlaca})
+    infoVehiculo = getPlacaVehiculo()
+    print("DEBUG - infoVehiculo : " + str(infoVehiculo), flush=True)
+    return infoVehiculo
+
+# endpoint para llamar placa entre valores predefinidos, por si falla la camara
+@app.route('/jetson/getPlacaSim', methods = ['GET'])
+def getPlacaSim():
+    infoVehiculo = getPlacaSimulada()
+    print("DEBUG - infoVehiculo : " + str(infoVehiculo), flush=True)
+    return infoVehiculo
+
 
   
 # driver function 
 if __name__ == '__main__': 
   
-    app.run(debug = True) 
+    app.run(host='0.0.0.0',debug = True) 

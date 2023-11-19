@@ -16,23 +16,27 @@ import requests
 urlServer = "https://fluffy-wasps-return.loca.lt"
 urlEndpoint = "/GR1/controlAcceso"
 
+#para mock
+from random import randint
+
 
 def agregarRegistro(jsonToSend):
     enpointRegistro = urlEndpoint + "/addRegistro/"
-    sendRequest = requests.post(urlServer+endPointRegistroDatos, json=jsonToSend)
+    sendRequest = requests.post(urlServer+enpointRegistro, json=jsonToSend)
     
     return sendRequest
 
 #Llama la camara principal, captura la imagen y hace reconocimiento de caracteres para el texto
 def procesarPlacaConCamara():
+    print("DEBUG, Iniciando procesado con camara \n---\n")
     #inicializar camara web
     camera = cv2.VideoCapture(0)
     # tomar una frama de video de la camara
 
     imageFrames = []
 
-    # tomar 15 muestras de la foto
-    for x in range(15):
+    # tomar 7 muestras de la foto
+    for x in range(7):
         ret, frame = camera.read()
         imageFrames.append(frame)
         
@@ -61,11 +65,11 @@ def procesarPlacaConCamara():
 
     #Revisamos que cadena se repite mas entre las 15 capturas, con la finalidad de minimizar falsos positivos por blur en la imagen 
     counterProm = Counter(choppedStrings)
-    mostRepeatedString = max(counterProm, key=counterProm.get)
+    posiblePlaca = max(counterProm, key=counterProm.get)
 
 
     ### TEST DEBUG ###
-    tmpObj = {"timeStamp": int(time.time()) , "placa": mostRepeatedString}
+    tmpObj = {"timeStamp": int(time.time()) , "placa": posiblePlaca}
     
     #JSON a enviar al servidor
     jsonToSend = json.dumps(tmpObj)
@@ -73,7 +77,7 @@ def procesarPlacaConCamara():
     resultRegistro = agregarRegistro(jsonToSend)
     #TODO Devolver JSON con resultados
     
-    return mostRepeatedString
+    return posiblePlaca
 
 
 def verificarPlaca(placa):
@@ -101,6 +105,32 @@ def agregarVehiculoAutorizado(autorizado):
 
 def getPlacaVehiculo():
 
-    return "AAA:001"
+    placa = procesarPlacaConCamara()
+    print("DEBUG, finalizado procesado con camara \n---\n")
+    permitido = ""
+    try:
+        permitido = str(verificarPlaca(placa))
+    except:
+        permitido = "error conectando con API"
+    obj = {"placa":placa, "timeStamp": int(time.time()), "permitido":permitido}
+
+
+    return obj
+
+def getPlacaSimulada():
+    placas = ['ABC-156', 'AAA-111', 'ZQP-199', 'LOL-223', 'CPS-208', 'JFT-989']
+
+    index = randint(0,5)
+    
+    placa = placas[index]
+    permitido = ""
+    try:
+        permitido = str(verificarPlaca(placa))
+    except:
+        permitido = "error conectando con API"
+    obj = {"placa":placa, "timeStamp": int(time.time()), "permitido":permitido}
+
+
+    return obj
 
 
